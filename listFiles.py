@@ -4,6 +4,7 @@ import os
 target_dir = "./testDir"
 
 #list everything inside target_dir
-dirList = os.scandir(target_dir)
-for entry in dirList:
-    print(entry.name)
+for dirpath, dirnames, files in os.walk(target_dir):
+    print(f'Found directory: {dirpath}')
+    for file_name in files:
+        print(file_name)
