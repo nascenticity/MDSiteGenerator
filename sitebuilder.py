@@ -1,6 +1,8 @@
 # import markdown for converting markdown to html strings
 from markdown import *
 
+# create a list of files to convert
+
 #get file contents & convert to html
 with open ("testMD.md", "r") as f:
 
