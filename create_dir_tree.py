@@ -24,12 +24,12 @@ def create_dir_tree(target_dir):
             #add a dictionary containing the subdirectory path & array of all md files within
             dir_tree.update({dirpath : temp_index})
 
-    with open("dir_tree.txt", "w") as f:
-        f.write("Directory Tree: \n")
-        for subdir in dir_tree:
-            f.write(f"{subdir} \n")
-            for entry in dir_tree[subdir]:
-                f.write(f"- {entry} \n")
+    #with open("dir_tree.txt", "w") as f:
+    #    f.write("Directory Tree: \n")
+     #   for subdir in dir_tree:
+      #      f.write(f"{subdir} \n")
+       #     for entry in dir_tree[subdir]:
+        #        f.write(f"- {entry} \n")
     
     return dir_tree
 
