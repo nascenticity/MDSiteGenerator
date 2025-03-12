@@ -20,7 +20,7 @@ def make_html(some_file):
 
     pageTitle = "Hello World"
 
-    html_template = f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>{pageTitle}</title> <link rel="stylesheet" href="style.css"> </head><body>{output}</body></html>'
+    html_template = f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>{pageTitle}</title> <link rel="stylesheet" href="style.css"> </head><body><nav><a href="/index.html">{pageTitle}</a></nav>{output}</body></html>'
 
     #create new filename
     file_name = some_file.removesuffix(".md")
