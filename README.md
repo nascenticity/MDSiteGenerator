@@ -3,7 +3,8 @@
 ## How to use:
 - have a directory full of md files that need to be converted to html
 - in CLI, type:
-``` python3 MDSiteBuilder.py
+``` 
+python3 MDSiteBuilder.py
 ```
 - when prompted, enter the path to the directory of md files
 - ???
