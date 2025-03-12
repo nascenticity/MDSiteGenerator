@@ -30,5 +30,7 @@ def create_dir_tree(target_dir):
             f.write(f"{subdir} \n")
             for entry in dir_tree[subdir]:
                 f.write(f"- {entry} \n")
+    
+    return dir_tree
 
 #create_dir_tree(input("Enter the path to the directory you want to create a tree from: "))
