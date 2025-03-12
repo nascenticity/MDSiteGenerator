@@ -1,7 +1,20 @@
-# get contents of md files & use them to generate a corresponding html file
+# import tinyhtml for creating html elements, and markdown for converting markdown to html strings
+from tinyhtml import *
+from markdown import *
 
-with open('testMD.md', 'r') as mdFile:
-    with open('testMD.html', 'w') as htmlFile:
-        for line in mdFile:
-            htmlFile.write(line)
-    
+#get file contents & convert to html
+with open ("testMD.md", "r") as f:
+
+    text = f.read()
+    output = markdown(text)
+
+print (output)
+
+# use tinyhtml to create an empty html template
+html_content = html(lang="en")(
+    h("head")(),
+    h("body")(
+       output
+    ),
+)
+print(html_content.render()) 
