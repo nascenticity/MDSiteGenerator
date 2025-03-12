@@ -1,5 +1,4 @@
-# import tinyhtml for creating html elements, and markdown for converting markdown to html strings
-# from tinyhtml import *
+# import markdown for converting markdown to html strings
 from markdown import *
 
 #get file contents & convert to html
@@ -9,17 +8,6 @@ with open ("testMD.md", "r") as f:
     output = markdown(text)
 
 print (output)
-
-# use tinyhtml to create an empty html template
-# html_content = html(lang="en")(
-  #  h("head")(
-   #     h("meta", charset="utf-8")
-    #),
-    # h("body")(
-      # frag(output)
-    # ),
-#)
-#print(html_content.render()) 
 
 pageTitle = "Hello World"
 
