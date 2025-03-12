@@ -10,6 +10,6 @@ python3 MDSiteBuilder.py
 - ???
 - profit
 ## To do:
-- make sure links get converted correctly
+- ~~ make sure links get converted correctly ~~
 - add options?
 - add menu/breadcrumb features to html
