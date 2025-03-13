@@ -45,6 +45,10 @@ def make_html(some_file, destination):
     title = html_template.select_one('title')
     title.append(file_name)
 
+    #add page header containing site name
+    header = html_template.select_one("header")
+    header.append(input("What is your site's name?: "))
+
     with open(f"{destination}/{file_name}.html", "w") as f3:
         f3.write(f"{html_template.prettify()}")
 
