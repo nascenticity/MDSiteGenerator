@@ -9,7 +9,3 @@ python3 MDSiteBuilder.py
 - when prompted, enter the path to the directory of md files
 - ???
 - profit
-## To do:
-- ~~ make sure links get converted correctly ~~
-- add options?
-- add menu/breadcrumb features to html

@@ -1,4 +1,0 @@
-Here is some info
-1) a list item
-2) a second list item
-3) a third list item

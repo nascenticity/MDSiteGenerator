@@ -1,10 +1,11 @@
 # import markdown for converting markdown to html strings
 from markdown import *
 from bs4 import BeautifulSoup
+import os
 
-def make_html(some_file):
-    
-    #split filepath at /, isolate filename, & remove .md suffix from filename
+def make_html(some_file, destination):
+
+    #remove .md suffix from filepath, split filepath at /, isolate filename, & 
     filepath = some_file.removesuffix(".md")
     split_name = filepath.rsplit("/")
     file_name = split_name[-1]
@@ -28,21 +29,23 @@ def make_html(some_file):
     with open(f"{filepath}.html", "r") as f2:
         temp_html = BeautifulSoup(f2.read())
 
-    print(temp_html)
+    #print(temp_html)
 
     #generate template as BeautifulSoup object
-    with open("template.html", "r") as t:
+    with open("./template.html", "r") as t:
        html_template = BeautifulSoup(t.read())
 
     #insert converted html output into template
     main = html_template.select_one('main')
-    main.append(temp_html)
+    #but only if there is any converted html to insert
+    if len(temp_html) > 0:
+        main.append(temp_html)
    
     #change page heading to be consistent with file name
     title = html_template.select_one('title')
     title.append(file_name)
 
-    with open(f"{filepath}.html", "w") as f3:
-        f3.write(f"{html_template}")
+    with open(f"{destination}/{file_name}.html", "w") as f3:
+        f3.write(f"{html_template.prettify()}")
 
-make_html("./testDir/subDir/testMD2.md")
+#make_html("./testDir/subDir/testMD2.md")
