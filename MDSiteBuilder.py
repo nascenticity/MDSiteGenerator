@@ -19,17 +19,26 @@ tree = create_dir_tree(target)
 
 #convert each file
 for subdir in tree:
-    #print(subdir)
+    
+    #replace source dir with save_dir in subdir path
+    new_path = subdir.replace(target, save_dir)
+    
+    #create save_dir/subdir_name if it doesn't already exist
+    try:
+        os.scandir(new_path)
+    except:
+        os.mkdir(new_path)
+
     for entry in tree[subdir]:
         #print(entry)
         if entry.endswith(".md"):
             #needs full filepath
-            make_html(f"{subdir}/{entry}",save_dir)
+            make_html(f"{subdir}/{entry}",new_path)
             print(f"Converted {subdir}/{entry} to HTML")
 
 #generate index.html and style.css
 
-make_index(save_dir)
+make_index(target, save_dir)
 
 with open(f"{save_dir}/style.css", "w") as f3:
     f3.write("")
