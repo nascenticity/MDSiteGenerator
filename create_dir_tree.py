@@ -17,8 +17,8 @@ def create_dir_tree(target_dir):
         #array to hold file names while in given subdirectory
         temp_index = []
         for file_name in files:
-            #only add markdown files
-            if file_name.endswith(".md"):
+            #exclude hidden files/directories eg .git
+            if not file_name.startswith("."):
                 temp_index.append(file_name)
         if len(temp_index) >0:
             #add a dictionary containing the subdirectory path & array of all md files within
