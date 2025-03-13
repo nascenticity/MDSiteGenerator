@@ -48,4 +48,3 @@ def make_html(some_file, destination):
     with open(f"{destination}/{file_name}.html", "w") as f3:
         f3.write(f"{html_template.prettify()}")
 
-#make_html("./testDir/subDir/testMD2.md")

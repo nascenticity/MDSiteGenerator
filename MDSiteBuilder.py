@@ -2,6 +2,7 @@ from create_dir_tree import create_dir_tree
 from make_HTML import make_html
 import os
 from make_index import make_index
+from make_css import make_css
 
 target = input("Enter the path to the directory: ")
 save_dir = input("Enter the path to the location where you want to save the html files: ")
@@ -34,11 +35,10 @@ for subdir in tree:
         if entry.endswith(".md"):
             #needs full filepath
             make_html(f"{subdir}/{entry}",new_path)
-            print(f"Converted {subdir}/{entry} to HTML")
+            # print(f"Converted {subdir}/{entry} to HTML")
 
 #generate index.html and style.css
 
 make_index(target, save_dir)
 
-with open(f"{save_dir}/style.css", "w") as f3:
-    f3.write("")
+make_css(save_dir)

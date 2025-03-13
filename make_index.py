@@ -5,45 +5,27 @@ import os
 
 def make_index(source_dir, destination):
 
-    try:
-        os.scandir(f"{source_dir}/README.md")
-    except:
-        temp_html = ""
-    else: 
-        #convert README.md file to temp html file
-        markdownFromFile(
-            input= f"{source_dir}/README.md",
-            output=f'{destination}/index.html',
-            encoding='utf8',
-        )
     
-        #convert links referencing .md files & replace references with the equivalent .html files
-        with open(f"{destination}/index.html", "r+") as f:
-            contents = f.read()
-            contents = contents.replace(".md",".html")
-            #resetting to the 0th character in the file is necessary to force contents to be overwritten
-            f.seek(0)
-            f.write(contents)
+    try:
+        # check if README.html has been created at destination
+        os.scandir(f"{destination}/README.html")
+        
+        #move the contents of README.html to index.html and delete README.html  
+        with open(f"{destination}/README.html", "r") as f:
+            content = f.read()
+            content = BeautifulSoup(content)
+        
+        with open(f"{destination}/index.html", "w") as f2:
+            f2.write(content.prettify())
+        
+        os.remove(f"{destination}/README.html")
+    except:
+        # if not, create a blank index.html file
+        with open(f"{destination}/index.html", "w") as f3:
+            f3.write("")   
+    
+        
 
-        #read temp html back in using Beautiful Soup
-        with open(f"{destination}/index.html", "r") as f2:
-            temp_html = BeautifulSoup(f2.read())
-
-        #print(temp_html)
-
-    #generate template as BeautifulSoup object
-    with open("./template.html", "r") as t:
-       html_template = BeautifulSoup(t.read())
-
-    #insert converted html output into template
-    main = html_template.select_one('main')
-    #but only if there is any converted html to insert
-    if len(temp_html) > 0:
-        main.append(temp_html)
+                  
    
-    #change page heading to be consistent with file name
-    title = html_template.select_one('title')
-    title.append(input("Enter the name of your webpage: "))
-
-    with open(f"{destination}/index.html", "w") as f3:
-        f3.write(f"{html_template.prettify()}")
+   
