@@ -1,31 +1,48 @@
 # import markdown for converting markdown to html strings
 from markdown import *
+from bs4 import BeautifulSoup
 
 def make_html(some_file):
     
-#get file contents & convert to html
-    with open (some_file, "r") as f:
+    #split filepath at /, isolate filename, & remove .md suffix from filename
+    filepath = some_file.removesuffix(".md")
+    split_name = filepath.rsplit("/")
+    file_name = split_name[-1]
 
-        #read file & store contents in text variable
-        text = f.read()
+    #convert md file to temp html file
+    markdownFromFile(
+        input= some_file,
+        output=f'{filepath}.html',
+        encoding='utf8',
+    )
+    
+    #convert links referencing .md files & replace references with the equivalent .html files
+    with open(f"{filepath}.html", "r+") as f:
+        contents = f.read()
+        contents = contents.replace(".md",".html")
+        #resetting to the 0th character in the file is necessary to force contents to be overwritten
+        f.seek(0)
+        f.write(contents)
 
-        #if text contains any links targeting md files, alter them to target the equivalent html file instead
-        
-        text = text.replace(".md", ".html")
+    #read temp html back in using Beautiful Soup
+    with open(f"{filepath}.html", "r") as f2:
+        temp_html = BeautifulSoup(f2.read())
 
-        #convert text to markdown & store in output variable
-        output = markdown(text)
+    print(temp_html)
 
-    #print (output)
+    #generate template as BeautifulSoup object
+    with open("template.html", "r") as t:
+       html_template = BeautifulSoup(t.read())
 
-    pageTitle = "Hello World"
+    #insert converted html output into template
+    main = html_template.select_one('main')
+    main.append(temp_html)
+   
+    #change page heading to be consistent with file name
+    title = html_template.select_one('title')
+    title.append(file_name)
 
-    html_template = f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>{pageTitle}</title> <link rel="stylesheet" href="style.css"> </head><body><nav><a href="/index.html">{pageTitle}</a></nav>{output}</body></html>'
-
-    #create new filename
-    file_name = some_file.removesuffix(".md")
-    print(file_name)
-    with open(f"{file_name}.html", "w") as f2:
-        f2.write(html_template)
+    with open(f"{filepath}.html", "w") as f3:
+        f3.write(f"{html_template}")
 
 make_html("./testDir/subDir/testMD2.md")
