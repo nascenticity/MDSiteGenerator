@@ -23,16 +23,17 @@ def make_css(save_dir):
 
                 where_css = os.path.relpath(f"{save_dir}/style.css", dirpath)
 
-                #print(where_css)
-
                 with open(f"{dirpath}/{file_name}", "r") as f:
                     contents = f.read()
                     contents = BeautifulSoup(contents)
 
                 if len(contents) > 0:
                     stylesheet = contents.select_one("link")
-                    stylesheet["href"] = where_css
-                    #print(stylesheet)
-                    with open(f"{dirpath}/{file_name}", "w") as f2:
-                        f2.write(f"{contents}")
+                    if stylesheet:
+                        stylesheet["href"] = where_css
+                        #print(stylesheet)
+                        with open(f"{dirpath}/{file_name}", "w") as f2:
+                            f2.write(f"{contents}")
+            else:
+                print("non HTML detected, no action taken")
     
