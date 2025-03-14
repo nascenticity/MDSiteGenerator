@@ -9,16 +9,16 @@ def make_html(some_file, destination):
     filepath = some_file.removesuffix(".md")
     split_name = filepath.rsplit("/")
     file_name = split_name[-1]
-
+   
     #convert md file to temp html file
     markdownFromFile(
         input= some_file,
-        output=f'{filepath}.html',
+        output=f"{destination}/{file_name}.html",
         encoding='utf8',
     )
     
     #convert links referencing .md files & replace references with the equivalent .html files
-    with open(f"{filepath}.html", "r+") as f:
+    with open(f"{destination}/{file_name}.html", "r+") as f:
         contents = f.read()
         contents = contents.replace(".md",".html")
         #resetting to the 0th character in the file is necessary to force contents to be overwritten
@@ -26,7 +26,7 @@ def make_html(some_file, destination):
         f.write(contents)
 
     #read temp html back in using Beautiful Soup
-    with open(f"{filepath}.html", "r") as f2:
+    with open(f"{destination}/{file_name}.html", "r") as f2:
         temp_html = BeautifulSoup(f2.read())
 
     #print(temp_html)
@@ -50,5 +50,6 @@ def make_html(some_file, destination):
     header.append(some_file)
 
     with open(f"{destination}/{file_name}.html", "w") as f3:
+        f3.seek( 0 )
         f3.write(f"{html_template.prettify()}")
 
