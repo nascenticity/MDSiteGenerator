@@ -3,6 +3,7 @@ from make_HTML import make_html
 import os
 from make_index import make_index
 from make_css import make_css
+import shutil
 
 target = input("Enter the path to the directory: ")
 save_dir = input("Enter the path to the location where you want to save the html files: ")
@@ -36,6 +37,9 @@ for subdir in tree:
             #needs full filepath
             make_html(f"{subdir}/{entry}",new_path)
             # print(f"Converted {subdir}/{entry} to HTML")
+        else:
+            # for non md files simply copy them
+            shutil.copy(f"{subdir}/{entry}",new_path.removesuffix(entry))
 
 #generate index.html and style.css
 
