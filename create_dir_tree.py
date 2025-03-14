@@ -15,10 +15,16 @@ def create_dir_tree(target_dir):
     for dirpath, dirnames, files in os.walk(target_dir):
         # print(f'Found directory: {dirpath}')
         #array to hold file names while in given subdirectory
+        
+        #removes root directory from path
+        pathy = dirpath.removeprefix(target_dir)
+        print(pathy)
+        
+
         temp_index = []
         for file_name in files:
-            #only add markdown files
-            if file_name.endswith(".md"):
+            # filter out files in hidden directories
+            if not pathy.startswith("/."):
                 temp_index.append(file_name)
         if len(temp_index) >0:
             #add a dictionary containing the subdirectory path & array of all md files within
