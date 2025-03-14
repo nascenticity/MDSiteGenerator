@@ -2,6 +2,7 @@
 from markdown import *
 from bs4 import BeautifulSoup
 import os
+from markdown.extensions.tables import TableExtension
 
 def make_html(some_file, destination):
 
@@ -15,6 +16,7 @@ def make_html(some_file, destination):
         input= some_file,
         output=f"{destination}/{file_name}.html",
         encoding='utf8',
+        extensions=[TableExtension(use_align_attribute=True)]
     )
     
     #convert links referencing .md files & replace references with the equivalent .html files
