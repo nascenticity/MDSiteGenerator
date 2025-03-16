@@ -6,7 +6,7 @@ import os
 #target_dir = input("Enter the path to the directory you want to create a tree from: ")
 
 #list everything inside target_dir
-def create_dir_tree(target_dir):
+def create_dir_tree(target_dir, save_dir):
 
     #empty dictionary object to contain directory tree info
     dir_tree = {}
@@ -36,7 +36,10 @@ def create_dir_tree(target_dir):
       #      f.write(f"{subdir} \n")
        #     for entry in dir_tree[subdir]:
         #        f.write(f"- {entry} \n")
-    
+
+    # dir_tree = dir_tree.pop(save_dir)
+   
+    print(dir_tree)
     return dir_tree
 
 #create_dir_tree(input("Enter the path to the directory you want to create a tree from: "))

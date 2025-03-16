@@ -8,16 +8,15 @@ import shutil
 target = input("Enter the path to the directory: ")
 save_dir = input("Enter the path to the location where you want to save the html files: ")
 
-#create the destination directory if it doesn't exist
-try:
-    os.scandir(save_dir)
-except:
-    os.mkdir(save_dir)
-   
-#create the destination directory if it doesn't already exist
+#delete the destination directory if it already exists
+if os.scandir(save_dir):
+    shutil.rmtree(save_dir)
 
+#create a fresh copy of the save directory
+os.mkdir(save_dir)
+   
 # create a list of files to convert
-tree = create_dir_tree(target)
+tree = create_dir_tree(target, save_dir)
 
 #convert each file
 for subdir in tree:
