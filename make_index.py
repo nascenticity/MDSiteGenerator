@@ -5,10 +5,9 @@ import os
 
 def make_index(source_dir, destination):
 
+
     
-    try:
-        # check if README.html has been created at destination
-        os.scandir(f"{destination}/README.html")
+
         
         #move the contents of README.html to index.html and delete README.html  
         with open(f"{destination}/README.html", "r") as f:
@@ -19,10 +18,7 @@ def make_index(source_dir, destination):
             f2.write(content.prettify())
         
         os.remove(f"{destination}/README.html")
-    except:
-        # if not, create a blank index.html file
-        with open(f"{destination}/index.html", "w") as f3:
-            f3.write("")   
+
     
         
 
