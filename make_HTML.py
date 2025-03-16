@@ -49,7 +49,7 @@ def make_html(some_file, destination):
 
     #add page header containing site name
     header = html_template.select_one("header")
-    header.append(some_file)
+    header.append(file_name)
 
     with open(f"{destination}/{file_name}.html", "w") as f3:
         f3.seek( 0 )
